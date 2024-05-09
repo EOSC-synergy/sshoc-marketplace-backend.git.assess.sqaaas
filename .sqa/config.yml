@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.1
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/SSHOC/sshoc-marketplace-backend:
+      branch: develop
+      repo: https://github.com/SSHOC/sshoc-marketplace-backend.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/SSHOC/sshoc-marketplace-backend git:
+        commands:
+        - /usr/bin/env sh .sqa/script.homey-maroon-quail.sh
+        container: qc.acc_chewy-lime-ragdoll
+  QC.Doc:
+    repos:
+      github.com/SSHOC/sshoc-marketplace-backend find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.seedy-yellow-manatee.sh
+        container: qc.doc_hazy-tangerine-chow
+      github.com/SSHOC/sshoc-marketplace-backend git:
+        commands:
+        - /usr/bin/env sh .sqa/script.squirrely-copper-lion.sh
+        container: qc.doc_jumpy-blue-jellyfish
+      github.com/SSHOC/sshoc-marketplace-backend markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-wisteria-slug.sh
+        container: qc.doc_flimsy-lilac-hare
+  QC.Lic:
+    repos:
+      github.com/SSHOC/sshoc-marketplace-backend licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleepy-violet-gopher.sh
+        container: qc.lic_slaphappy-tan-moth
+  QC.Sty:
+    repos:
+      github.com/SSHOC/sshoc-marketplace-backend checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.lumpy-magenta-indri.sh
+        container: qc.sty_silly-sapphire-catfish
+      github.com/SSHOC/sshoc-marketplace-backend hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.geeky-azure-russel.sh
+        container: qc.sty_grumpy-indigo-gar
+  QC.Ver:
+    repos:
+      github.com/SSHOC/sshoc-marketplace-backend get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.whiny-saffron-opossum.sh
+        container: qc.ver_snippy-grey-scorpion
+timeout: 5400
